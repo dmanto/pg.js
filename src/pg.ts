@@ -49,7 +49,7 @@ export default class Pg extends Base {
         ...options,
         ...Pg.parseConfig(config),
         verify: (client: pg.PoolClient, done: (err?: Error) => void) => {
-          if (this.searchPath?.length > 0) {
+          if (this.searchPath.length > 0) {
             const searchPath = this.searchPath.map(path => client.escapeIdentifier(path)).join(', ');
             client.query(`SET search_path TO ${searchPath}`, err => done(err ?? undefined));
           } else {
